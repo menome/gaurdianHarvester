@@ -1,0 +1,13 @@
+{
+  "url": "https://content.guardianapis.com",
+  "key": "754b5ee2-2afa-4be7-9264-9f8f212ede0d",
+  "logging": true,
+  "port": 3009,
+  "rabbit": {
+    "enable": true,
+    "url": "amqp://rabbitmq:rabbitmq@localhost:5672?heartbeat=3600",
+    "routingKey": "syncevents.harvester.updates.example",
+    "exchange": "syncevents",
+    "exchangeType": "topic"
+  }
+}
