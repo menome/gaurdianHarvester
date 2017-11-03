@@ -16,20 +16,22 @@ module.exports = {
 async function harvestAll() {
   bot.changeState({state: "working"})
   bot.logger.info("Starting Tag Harvest");
-  //await getBatchEndpoint(config.get('url')+"/tags", models.tagTransform);
+  await getBatchEndpoint(config.get('url')+"/tags", models.tagTransform, 4971);
   bot.logger.info("Tag Harvest Finished");
   bot.logger.info("Starting Section Harvest");  
-  await getBatchEndpoint(config.get('url')+"/sections", models.tagTransform);
+  await getBatchEndpoint(config.get('url')+"/sections", models.secTransform, 0);
   bot.logger.info("Section Harvest Finished");
-  
+  bot.logger.info("Starting Edition Harvest");  
+  await getBatchEndpoint(config.get('url')+"/editions", models.edTransform, 0);
+  bot.logger.info("Edition Harvest Finished");
 }
 
 
 
 // Gets items from the endpoint in a batch. Makes calls of a batch size until we have all the objects.
-function getBatchEndpoint(uri, transformFunc) {
+function getBatchEndpoint(uri, transformFunc, cp) {
   var parsedRecords = 0;
-  var currPage = 0;
+  var currPage = cp;
 
   var getNextBatch = function() {
     return getEndpoint(uri, transformFunc, {page: currPage = currPage+1})
@@ -53,7 +55,7 @@ function getBatchEndpoint(uri, transformFunc) {
 function getEndpoint(uri, transformFunc, qs) {
   bot.logger.info("Running batch number: " + qs.page);  
   var options = {
-    uri: uri + "?page=" + qs.page,
+    uri: uri + "?page="+qs.page,
     json: true,
     headers: {
       'api-key':config.get('key'), 

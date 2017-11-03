@@ -9,14 +9,15 @@
  */
 
 var config = require('./config.js');
-
+var bot = require('@menome/botframework')
 
 //////////////////////////////////////
 // These are transforms for REST responses.
 //////////////////////////////////////
 module.exports = {
   tagTransform,
-  secTransform
+  secTransform,
+  edTransform
 } 
 
 function tagTransform(itm){
@@ -50,9 +51,10 @@ function tagTransform(itm){
 
 
 function secTransform(itm){
+  //bot.logger.info(JSON.stringify(itm))
   msg = {
     "Name": itm.webTitle,
-    "NodeType":itm.type,
+    "NodeType":"Section",
     "SourceSystem": "gaurdianAPI",
     "Priority": 1,
     "ConformedDimensions": {
