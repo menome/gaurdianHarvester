@@ -14,7 +14,7 @@
     "request": "latest",
     "request-promise": "latest",
     "breakdance-cli": "latest",
-    "@menome/botframework": "^1.0.0"
+    "@menome/botframework": "^1.0.6"
   },
   "devDependencies": {
     "mocha": "^3.4.2",

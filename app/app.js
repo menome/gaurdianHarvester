@@ -24,8 +24,11 @@ bot.registerEndpoint({
   "method": "POST",
   "desc": "Runs a full sync of REST endpoint through the harvester."
 }, function(req,res) {
-  res.send("Starting the REST Harvest")
-  harvester.harvestAll();
+  res.send(bot.responseWrapper({
+    status: "success",
+    message: "Starting the REST harvest"
+  }))
+  return harvester.harvestAll();
 });
 
 
